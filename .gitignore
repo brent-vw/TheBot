@@ -1,7 +1,10 @@
 # Created by .ignore support plugin (hsz.mobi)
+target/
 ### Java template
 # Compiled class file
 *.class
+
+src/main/resources/com/brentvw/discord/.keyfile
 
 # Log file
 *.log
