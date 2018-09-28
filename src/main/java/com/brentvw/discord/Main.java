@@ -1,6 +1,12 @@
 package com.brentvw.discord;
 
 import com.brentvw.discord.handler.BasicallyHandler;
+import com.brentvw.discord.handler.Handler;
+import com.brentvw.discord.handler.MessageHandler;
+import io.github.classgraph.ClassGraph;
+import io.github.classgraph.ClassInfo;
+import io.github.classgraph.ClassInfoList;
+import io.github.classgraph.ScanResult;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
 
@@ -13,7 +19,7 @@ public class Main {
     public static void main(String... args) throws Exception {
         Listener listener = new Listener();
         listener.addHandler(new BasicallyHandler());
-
+        scanHandlers(listener);
         String key = parseKey();
         JDA jda = new JDABuilder(key)
                 .addEventListener(listener)
@@ -21,6 +27,21 @@ public class Main {
 
         // optionally block until JDA is ready
         jda.awaitReady();
+    }
+
+    private static void scanHandlers(Listener listener) {
+        try (ScanResult scanResult = new ClassGraph()
+                .enableAllInfo()
+                .whitelistPackages("com.brentvw.discord.handler")
+                .scan()){
+            ClassInfoList classes = scanResult.getClassesWithAnnotation(MessageHandler.class.getName());
+            classes.stream().map(ClassInfo::loadClass).filter(Handler.class::isAssignableFrom).forEach(classZ -> {
+                try {
+                    listener.addHandler((Handler) classZ.newInstance());
+                } catch (InstantiationException | IllegalAccessException ignored) {
+                }
+            });
+        }
     }
 
     private static String parseKey() throws IOException {
