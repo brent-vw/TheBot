@@ -5,6 +5,8 @@ target/
 *.class
 
 src/main/resources/com/brentvw/discord/.keyfile
+.idea/
+CounterBot.iml
 
 # Log file
 *.log
