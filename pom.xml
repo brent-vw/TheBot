@@ -18,6 +18,14 @@
                 </configuration>
             </plugin>
             <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.6.0</version>
+                <configuration>
+                    <mainClass>com.brentvw.discord.Main</mainClass>
+                </configuration>
+            </plugin>
+            <plugin>
                 <!-- The gmavenplus plugin is used to compile Groovy code. To learn more about this plugin,
                 visit https://github.com/groovy/GMavenPlus/wiki -->
                 <groupId>org.codehaus.gmavenplus</groupId>
