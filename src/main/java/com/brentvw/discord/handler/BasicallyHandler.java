@@ -1,5 +1,6 @@
 package com.brentvw.discord.handler;
 
+@MessageHandler
 public class BasicallyHandler implements Handler {
     static int AMOUNT = 237;
 
