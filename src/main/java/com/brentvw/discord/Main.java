@@ -1,6 +1,7 @@
 package com.brentvw.discord;
 
 import com.brentvw.discord.handler.BasicallyHandler;
+import com.brentvw.discord.handler.CounterHandler;
 import com.brentvw.discord.handler.Handler;
 import com.brentvw.discord.handler.MessageHandler;
 import io.github.classgraph.ClassGraph;
@@ -18,7 +19,6 @@ import java.io.InputStreamReader;
 public class Main {
     public static void main(String... args) throws Exception {
         Listener listener = new Listener();
-        listener.addHandler(new BasicallyHandler());
         scanHandlers(listener);
         String key = parseKey();
         JDA jda = new JDABuilder(key)
