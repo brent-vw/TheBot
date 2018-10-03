@@ -1,12 +1,12 @@
 package com.brentvw.discord.handler;
 
 @MessageHandler
-public class BasicallyHandler extends CounterHandler {
+public class IkHebEenVraagjeHandler extends CounterHandler {
     private static int COUNT = 0;
 
     @Override
     protected String getCommand() {
-        return "!basically";
+        return "!ikhebeenvraagje";
     }
 
     @Override
@@ -21,8 +21,6 @@ public class BasicallyHandler extends CounterHandler {
 
     @Override
     protected String getEmoji() {
-        return "<:basically:494798716780412928>";
+        return "<:ikhebeenvraagje:494850108853059584>";
     }
-
-
 }
