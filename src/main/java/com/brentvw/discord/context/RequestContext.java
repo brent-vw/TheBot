@@ -9,9 +9,14 @@ import java.util.List;
 
 public interface RequestContext {
     List<Member> getUsers();
+
     Channel getChannel();
+
     User getSender();
+
     List<Member> getMentions();
+
     String getMessage();
+
     List<Message.Attachment> getAttachments();
 }

@@ -1,9 +1,6 @@
 package com.brentvw.discord.handler
 
-import com.brentvw.discord.context.RequestContext
-import spock.lang.Specification
-
-class BasicallyHandlerSpec extends Specification {
+class BasicallyHandlerSpec extends HandlerContext {
     BasicallyHandler handler
 
     def setup() {
@@ -69,9 +66,25 @@ class BasicallyHandlerSpec extends Specification {
         handler.getCount() == 1337
     }
 
-    def getContext(def message) {
-        return Mock(RequestContext) {
-            getMessage() >> message
-        }
+    def "Handle with too many arguments should return an error message"() {
+        given:
+        handler.setCount(0)
+
+        when:
+        def result = handler.handle(getContext("!basically a b c d"))
+
+        then:
+        result == "Invalid arguments" //groovy compiles this to equals
+    }
+
+    def "Handle with invalid number should throw an error"() {
+        given:
+        handler.setCount(0)
+
+        when:
+        def result = handler.handle(getContext("!basically set EWAEAW"))
+
+        then:
+        result.contains("RESPECT RULE 2")
     }
 }

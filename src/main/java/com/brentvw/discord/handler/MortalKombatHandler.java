@@ -1,6 +1,7 @@
 package com.brentvw.discord.handler;
 
 import com.brentvw.discord.context.RequestContext;
+import com.google.common.annotations.VisibleForTesting;
 
 import java.util.*;
 
@@ -9,16 +10,12 @@ public class MortalKombatHandler implements Handler {
 
     private final Set<String> combatants;
 
-
     public MortalKombatHandler() {
-
-        combatants = Init();
-
+        this.combatants = new HashSet<>();
+        initCombatants();
     }
 
-    private Set<String> Init() {
-        Set<String> combatants;
-        combatants = new HashSet<>();
+    private void initCombatants() {
         combatants.add("Ben");
         combatants.add("Brent");
         combatants.add("Daniel");
@@ -35,7 +32,6 @@ public class MortalKombatHandler implements Handler {
         combatants.add("Shaun");
         combatants.add("Stijn");
         combatants.add("Tim");
-        return combatants;
     }
 
     @Override
@@ -60,16 +56,21 @@ public class MortalKombatHandler implements Handler {
     }
 
     public String getCommand() {
-
         return "!fight";
+    }
 
+    @VisibleForTesting
+    void addCombattant(String name) {
+        combatants.add(name);
     }
 
     private boolean checkNames(String[] content) {
 
         if (!content[0].equals(content[1])) {
             List<String> contentAsList = Arrays.asList(content);
-            return combatants.stream().allMatch(s -> contentAsList.stream().allMatch(s2 -> s2.equalsIgnoreCase(s)));
+            return contentAsList.stream()
+                    .allMatch(s -> combatants.stream()
+                            .anyMatch(s2 -> s2.equalsIgnoreCase(s)));
         }
         return false;
     }
