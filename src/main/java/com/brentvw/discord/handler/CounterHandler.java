@@ -26,7 +26,7 @@ public abstract class CounterHandler implements Handler {
                 return getMessage();
         }
 
-        String[] content = message.replace(getCommand(), "").split(" ");
+        String[] content = message.replace(getCommand(), "").trim().split(" ");
 
         if(content.length < 2) {
             return "Invalid arguments";
