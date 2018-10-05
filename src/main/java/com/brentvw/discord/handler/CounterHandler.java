@@ -1,5 +1,7 @@
 package com.brentvw.discord.handler;
 
+import com.brentvw.discord.context.RequestContextImpl;
+
 @MessageHandler
 public abstract class CounterHandler implements Handler {
     protected abstract String getCommand();
@@ -8,13 +10,13 @@ public abstract class CounterHandler implements Handler {
     protected abstract String getEmoji();
 
     @Override
-    public boolean canHandle(String message) {
-        return message.startsWith(getCommand());
+    public boolean canHandle(RequestContextImpl context) {
+        return context.getMessage().startsWith(getCommand());
     }
 
     @Override
-    public String handle(String message) {
-        String event = message.replace(getCommand(), "");
+    public String handle(RequestContextImpl context) {
+        String event = context.getMessage().replace(getCommand(), "");
         switch (event) {
             case "++":
                 setCount(getCount() + 1);
@@ -26,7 +28,7 @@ public abstract class CounterHandler implements Handler {
                 return getMessage();
         }
 
-        String[] content = message.replace(getCommand(), "").trim().split(" ");
+        String[] content = context.getMessage().replace(getCommand(), "").trim().split(" ");
 
         if(content.length < 2) {
             return "Invalid arguments";
