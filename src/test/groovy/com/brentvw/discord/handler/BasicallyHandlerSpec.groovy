@@ -1,5 +1,6 @@
 package com.brentvw.discord.handler
 
+import com.brentvw.discord.context.RequestContext
 import spock.lang.Specification
 
 class BasicallyHandlerSpec extends Specification {
@@ -11,25 +12,25 @@ class BasicallyHandlerSpec extends Specification {
 
     def "BasicallyHandler should handle events starting with !basically"() {
         expect:
-        handler.canHandle("!basically")
-        handler.canHandle("!basicallydsfsdfds")
-        handler.canHandle("!basically ")
+        handler.canHandle(getContext("!basically"))
+        handler.canHandle(getContext("!basicallydsfsdfds"))
+        handler.canHandle(getContext("!basically "))
     }
 
     def "BasicallyHandler should not handle events not starting with !basically"() {
         expect:
-        !handler.canHandle("!basic")
-        !handler.canHandle("!")
-        !handler.canHandle("")
-        !handler.canHandle("!unrelated")
+        !handler.canHandle(getContext("!basic"))
+        !handler.canHandle(getContext("!"))
+        !handler.canHandle(getContext(""))
+        !handler.canHandle(getContext("!unrelated"))
     }
 
     def "Handle with !basically should return a message containing the count"() {
         given:
-        handler.AMOUNT = 1337
+        handler.setCount(1337)
 
         when:
-        def result = handler.handle("!basically")
+        def result = handler.handle(getContext("!basically"))
 
         then:
         result.contains("1337")
@@ -37,34 +38,40 @@ class BasicallyHandlerSpec extends Specification {
 
     def "Handle with !basically++ should increment the count"() {
         given:
-        handler.AMOUNT = 1336
+        handler.setCount(1336)
 
         when:
-        handler.handle("!basically++")
+        handler.handle(getContext("!basically++"))
 
         then:
-        handler.AMOUNT == 1337
+        handler.getCount() == 1337
     }
 
     def "Handle with !basically-- should increment the count"() {
         given:
-        handler.AMOUNT = 1338
+        handler.setCount(1338)
 
         when:
-        handler.handle("!basically--")
+        handler.handle(getContext("!basically--"))
 
         then:
-        handler.AMOUNT == 1337
+        handler.getCount() == 1337
     }
 
     def "Handle with !basically set <num> should set the count"() {
         given:
-        handler.AMOUNT = 0
+        handler.setCount(0)
 
         when:
-        handler.handle("!basically set 1337")
+        handler.handle(getContext("!basically set 1337"))
 
         then:
-        handler.AMOUNT == 1337
+        handler.getCount() == 1337
+    }
+
+    def getContext(def message) {
+        return Mock(RequestContext) {
+            getMessage() >> message
+        }
     }
 }

@@ -4,6 +4,7 @@ import com.brentvw.discord.handler.Handler
 import net.dv8tion.jda.core.entities.Channel
 import net.dv8tion.jda.core.entities.Message
 import net.dv8tion.jda.core.entities.MessageChannel
+import net.dv8tion.jda.core.entities.TextChannel
 import net.dv8tion.jda.core.entities.User
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent
 import net.dv8tion.jda.core.requests.restaction.MessageAction
@@ -30,7 +31,9 @@ class ListenerSpec extends Specification {
             getAuthor() >> Mock(User) {
                 isBot() >> false
             }
-            getMessage() >> Mock(Message.class)
+            getMessage() >> Mock(Message.class) {
+                getTextChannel() >> Mock(TextChannel)
+            }
             getChannel() >> Mock(MessageChannel.class) {
                 sendMessage(_) >> Mock(MessageAction)
             }
