@@ -1,6 +1,8 @@
 package com.brentvw.discord;
 
 
+import com.brentvw.discord.context.RequestContext;
+import com.brentvw.discord.context.RequestContextImpl;
 import com.brentvw.discord.handler.Handler;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
@@ -27,11 +29,11 @@ public class Listener extends ListenerAdapter {
             return;
         }
 
-        String message = event.getMessage().getContentRaw();
+        RequestContext context = new RequestContextImpl(event.getMessage());
 
         handlers.stream()
-                .filter(h -> h.canHandle(message))
+                .filter(h -> h.canHandle(context))
                 .findFirst()
-                .ifPresent(h -> event.getChannel().sendMessage(h.handle(message)).complete());
+                .ifPresent(h -> event.getChannel().sendMessage(h.handle(context)).complete());
     }
 }

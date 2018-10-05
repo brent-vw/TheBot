@@ -13,7 +13,6 @@ public class FightDescriptor {
     private Map<String, String> values = new HashMap<String, String>();
 
 
-
     public FightDescriptor() {
         fightDescriptions = new HashMap<>();
         fightDescriptions.put(0, "%(winner) just gave %(loser) a vicious beatdown with nothing but his bare fists.");
@@ -35,9 +34,9 @@ public class FightDescriptor {
         this.fightDescriptions = fightDescriptions;
     }
 
-    public String determineWinner(String winner, String loser){
-        values.put("winner",winner);
-        values.put("loser",loser);
+    public String determineWinner(String winner, String loser) {
+        values.put("winner", winner);
+        values.put("loser", loser);
         StrSubstitutor sub = new StrSubstitutor(values, "%(", ")");
         return sub.replace(fightDescriptions.get(new Random().nextInt(9)));
     }
