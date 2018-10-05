@@ -1,6 +1,6 @@
 package com.brentvw.discord.handler;
 
-import com.brentvw.discord.context.RequestContextImpl;
+import com.brentvw.discord.context.RequestContext;
 
 import java.util.*;
 
@@ -10,7 +10,7 @@ public class MortalKombatHandler implements Handler {
     private final Set<String> combatants;
 
 
-    public MortalKombatHandler(){
+    public MortalKombatHandler() {
 
         combatants = Init();
 
@@ -39,12 +39,12 @@ public class MortalKombatHandler implements Handler {
     }
 
     @Override
-    public boolean canHandle(RequestContextImpl context) {
+    public boolean canHandle(RequestContext context) {
         return context.getMessage().startsWith(getCommand());
     }
 
     @Override
-    public String handle(RequestContextImpl context) {
+    public String handle(RequestContext context) {
 
         String[] content = context.getMessage().replace(getCommand(), "").trim().split(" ");
 

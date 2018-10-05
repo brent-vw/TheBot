@@ -1,21 +1,24 @@
 package com.brentvw.discord.handler;
 
-import com.brentvw.discord.context.RequestContextImpl;
+import com.brentvw.discord.context.RequestContext;
 
 @MessageHandler
 public abstract class CounterHandler implements Handler {
     protected abstract String getCommand();
+
     protected abstract int getCount();
+
     protected abstract void setCount(int i);
+
     protected abstract String getEmoji();
 
     @Override
-    public boolean canHandle(RequestContextImpl context) {
+    public boolean canHandle(RequestContext context) {
         return context.getMessage().startsWith(getCommand());
     }
 
     @Override
-    public String handle(RequestContextImpl context) {
+    public String handle(RequestContext context) {
         String event = context.getMessage().replace(getCommand(), "");
         switch (event) {
             case "++":
@@ -30,11 +33,11 @@ public abstract class CounterHandler implements Handler {
 
         String[] content = context.getMessage().replace(getCommand(), "").trim().split(" ");
 
-        if(content.length < 2) {
+        if (content.length < 2) {
             return "Invalid arguments";
         }
 
-        if(content[0].equals("set")) {
+        if (content[0].equals("set")) {
             return setCount(content[1]);
         }
 
@@ -51,9 +54,9 @@ public abstract class CounterHandler implements Handler {
     }
 
     protected String getMessage() {
-        if(getCount() % 100 == 0) {
+        if (getCount() % 100 == 0) {
             return String.format("%s WE DID IT REDDIT: %s :tada: :tada: :tada: :tada: :tada:", getEmoji(), getCount());
-        } else if(getCount() % 10 == 0) {
+        } else if (getCount() % 10 == 0) {
             return String.format("%s %s :tada: :tada: :tada: :tada: :tada:", getEmoji(), getCount());
         } else {
             return String.format("%s %s", getEmoji(), getCount());

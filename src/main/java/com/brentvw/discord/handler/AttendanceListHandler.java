@@ -1,6 +1,6 @@
 package com.brentvw.discord.handler;
 
-import com.brentvw.discord.context.RequestContextImpl;
+import com.brentvw.discord.context.RequestContext;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -36,12 +36,12 @@ public class AttendanceListHandler implements Handler {
 
 
     @Override
-    public boolean canHandle(RequestContextImpl context) {
+    public boolean canHandle(RequestContext context) {
         return context.getMessage().startsWith(getCommand());
     }
 
     @Override
-    public String handle(RequestContextImpl context) {
+    public String handle(RequestContext context) {
         String event = context.getMessage().replace(getCommand(), "").trim();
         switch (event) {
             case "who":
@@ -67,7 +67,6 @@ public class AttendanceListHandler implements Handler {
     public static List<String> getNames() {
         return Collections.unmodifiableList(names);
     }
-
 
 
     public void currentResponsibleForList() {
