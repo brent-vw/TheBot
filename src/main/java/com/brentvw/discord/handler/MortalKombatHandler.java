@@ -5,10 +5,17 @@ import java.util.*;
 @MessageHandler
 public class MortalKombatHandler implements Handler {
 
-    private static final Set<String> combatants;
+    private final Set<String> combatants;
 
-    static {
 
+    public MortalKombatHandler(){
+
+        combatants = Init();
+
+    }
+
+    private Set<String> Init() {
+        Set<String> combatants;
         combatants = new HashSet<>();
         combatants.add("Ben");
         combatants.add("Brent");
@@ -26,8 +33,8 @@ public class MortalKombatHandler implements Handler {
         combatants.add("Shaun");
         combatants.add("Stijn");
         combatants.add("Tim");
+        return combatants;
     }
-
 
     @Override
     public boolean canHandle(String message) {
@@ -60,7 +67,7 @@ public class MortalKombatHandler implements Handler {
 
         if (!content[0].equals(content[1])) {
             List<String> contentAsList = Arrays.asList(content);
-            return combatants.containsAll(contentAsList);
+            return combatants.stream().allMatch(s -> contentAsList.stream().allMatch(s2 -> s2.equalsIgnoreCase(s)));
         }
         return false;
     }
@@ -84,7 +91,7 @@ public class MortalKombatHandler implements Handler {
     }
 
     private String fightDescriptions(String winner, String loser) {
-        return new FightDescriptor().determineWinner(winner,loser);
+        return new FightDescriptor().determineWinner(winner, loser);
     }
 
 }
