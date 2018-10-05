@@ -1,0 +1,9 @@
+plugins:
+  checkstyle:
+    enabled: true
+  fixme:
+    enabled: true
+  sonar-java:
+    enabled: true
+    config:
+      sonar.java.source: 8
