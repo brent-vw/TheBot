@@ -7,7 +7,6 @@ public class AttendanceListHandler implements Handler{
 
     private static final List<String> names;
 
-
     static{
         names = new ArrayList<>();
         names.add("Ben");
@@ -34,7 +33,7 @@ public class AttendanceListHandler implements Handler{
 
     @Override
     public String handle(String message) {
-        return names.get((int)(Math.random()*15+1))+"zal de verantwoordelijke zijn voor de lijst.";
+        return names.get((int)(Math.random()*(names.size()-1)))+"zal de verantwoordelijke zijn voor de lijst.";
     }
-    
+
 }
