@@ -7,3 +7,13 @@ plugins:
     enabled: true
     config:
       sonar.java.source: 8
+engines:
+  checkstyle:
+    enabled: true
+    checks:
+      com.puppycrawl.tools.checkstyle.checks.imports.CustomImportOrderCheck:
+        enabled: false
+      com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocMethodCheck:
+        enabled: false
+      com.puppycrawl.tools.checkstyle.checks.imports.AvoidStarImportCheck:
+        enabled: false
