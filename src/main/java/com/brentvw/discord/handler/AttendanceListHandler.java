@@ -1,13 +1,18 @@
 package com.brentvw.discord.handler;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+
 @MessageHandler
-public class AttendanceListHandler implements Handler{
+public class AttendanceListHandler implements Handler {
 
     private static final List<String> names;
 
-    static{
+    private static String name;
+
+
+    static {
         names = new ArrayList<>();
         names.add("Ben");
         names.add("Brent");
@@ -26,14 +31,45 @@ public class AttendanceListHandler implements Handler{
         names.add("Stijn");
     }
 
+
     @Override
     public boolean canHandle(String message) {
-        return message.startsWith("!delijst");
+        return message.startsWith(getCommand());
     }
 
     @Override
     public String handle(String message) {
-        return names.get((int)(Math.random()*(names.size()-1)))+"zal de verantwoordelijke zijn voor de lijst.";
+        String event = message.replace(getCommand(), "").trim();
+        switch (event) {
+            case "who":
+                if (name == null) {
+                    return "No name found.";
+                }
+                return name;
+            case "choose":
+                name = names.get((int) (Math.random() * (names.size() - 1))) + " zal de verantwoordelijke zijn voor de lijst.";
+                return name;
+
+        }
+        return "Invalid arguments";
+
     }
+
+    public String getCommand() {
+
+        return "!list";
+
+    }
+
+    public static List<String> getNames() {
+        return Collections.unmodifiableList(names);
+    }
+
+
+
+    public void currentResponsibleForList() {
+
+    }
+
 
 }
