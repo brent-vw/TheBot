@@ -1,2 +1,2 @@
 # TheBot basically
-[![Build Status](http://jenkins.brentvw.me:8080/buildStatus/icon?job=DiscordBot)](http://jenkins.brentvw.me:8080/job/DiscordBot/)
+[![Build Status](https://travis-ci.com/bvwman/TheBot.svg?branch=master)](https://travis-ci.com/bvwman/TheBot)
