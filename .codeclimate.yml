@@ -1,13 +1,5 @@
+version: "2"
 plugins:
-  checkstyle:
-    enabled: true
-  fixme:
-    enabled: true
-  sonar-java:
-    enabled: true
-    config:
-      sonar.java.source: 8
-engines:
   checkstyle:
     enabled: true
     checks:
@@ -17,3 +9,9 @@ engines:
         enabled: false
       com.puppycrawl.tools.checkstyle.checks.imports.AvoidStarImportCheck:
         enabled: false
+  fixme:
+    enabled: true
+  sonar-java:
+    enabled: true
+    config:
+      sonar.java.source: 8
