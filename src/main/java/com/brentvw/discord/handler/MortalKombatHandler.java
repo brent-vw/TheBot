@@ -84,21 +84,7 @@ public class MortalKombatHandler implements Handler {
     }
 
     private String fightDescriptions(String winner, String loser) {
-
-        switch (new Random().nextInt(5)) {
-            case 0:
-                return String.format("%s just gave %s a vicious beatdown with nothing but his bare fists.", winner, loser);
-            case 1:
-                return String.format("%s pulls out a hammer from his backpocket, then clubs %s's head into a new shape.", winner, loser);
-            case 2:
-                return String.format("%s and %s destroyed each other through unknown brutal means. Only dust is left.", winner, loser);
-            case 3:
-                return String.format("%s and %s have a dance-off. %s won flamboyantly.", winner, loser, winner);
-            case 4:
-                return String.format("%s flees and falls of a cliff. %s wins.", loser, winner);
-
-        }
-        return "No fights happening.";
+        return new FightDescriptor().determineWinner(winner,loser);
     }
 
 }

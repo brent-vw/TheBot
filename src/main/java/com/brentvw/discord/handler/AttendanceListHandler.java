@@ -1,5 +1,7 @@
 package com.brentvw.discord.handler;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -42,7 +44,7 @@ public class AttendanceListHandler implements Handler {
         String event = message.replace(getCommand(), "").trim();
         switch (event) {
             case "who":
-                if (name == null) {
+                if (StringUtils.isEmpty(name)) {
                     return "No name found.";
                 }
                 return name;
