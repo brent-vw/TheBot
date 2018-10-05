@@ -9,6 +9,8 @@ plugins:
         enabled: false
       com.puppycrawl.tools.checkstyle.checks.imports.AvoidStarImportCheck:
         enabled: false
+      com.puppycrawl.tools.checkstyle.checks.whitespace.OperatorWrapCheck:
+        enabled: false
   fixme:
     enabled: true
   sonar-java:
