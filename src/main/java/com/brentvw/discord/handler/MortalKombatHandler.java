@@ -1,5 +1,7 @@
 package com.brentvw.discord.handler;
 
+import com.brentvw.discord.context.RequestContextImpl;
+
 import java.util.*;
 
 @MessageHandler
@@ -37,14 +39,14 @@ public class MortalKombatHandler implements Handler {
     }
 
     @Override
-    public boolean canHandle(String message) {
-        return message.startsWith(getCommand());
+    public boolean canHandle(RequestContextImpl context) {
+        return context.getMessage().startsWith(getCommand());
     }
 
     @Override
-    public String handle(String message) {
+    public String handle(RequestContextImpl context) {
 
-        String[] content = message.replace(getCommand(), "").trim().split(" ");
+        String[] content = context.getMessage().replace(getCommand(), "").trim().split(" ");
 
         if (content.length < 2) {
             return "Invalid arguments";
