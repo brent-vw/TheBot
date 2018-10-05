@@ -2,7 +2,7 @@ package com.brentvw.discord.handler;
 
 @MessageHandler
 public class IkHebEenVraagjeHandler extends CounterHandler {
-    private static int COUNT = 0;
+    private int count;
 
     @Override
     protected String getCommand() {
@@ -11,12 +11,12 @@ public class IkHebEenVraagjeHandler extends CounterHandler {
 
     @Override
     protected int getCount() {
-        return COUNT;
+        return count;
     }
 
     @Override
-    protected void setCount(int i) {
-        COUNT = i;
+    protected void setCount(int count) {
+        this.count = count;
     }
 
     @Override
