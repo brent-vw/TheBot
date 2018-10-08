@@ -11,6 +11,8 @@ plugins:
         enabled: false
       com.puppycrawl.tools.checkstyle.checks.whitespace.OperatorWrapCheck:
         enabled: false
+      com.puppycrawl.tools.checkstyle.checks.coding.MissingSwitchDefaultCheck:
+        enabled: false
   fixme:
     enabled: true
   sonar-java:
