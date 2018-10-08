@@ -6,6 +6,9 @@ LOG_FILE=$EC2_HOME/bot.log
 KEY_FILE=$EC2_HOME/.keyfile
 KEY_FILE_DEST=$EC2_HOME/The-Bot/src/main/resources/com/brentvw/discord
 
+sudo chown -R ec2-user:ec2-user $EC2_HOME/The-Bot/
+cd $EC2_HOME/The-Bot
+
 if [ -e $PID_FILE ]
 then
     kill -9 `cat $PID_FILE`
