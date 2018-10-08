@@ -16,5 +16,5 @@ fi
 
 cp $KEY_FILE $KEY_FILE_DEST
 mvn clean install -DskipTests
-mvn exec:java -DskipTests & > $LOG_FILE
+mvn exec:java -DskipTests > $LOG_FILE &
 echo $! > $PID_FILE 
