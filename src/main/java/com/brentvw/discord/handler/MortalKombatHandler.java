@@ -68,9 +68,7 @@ public class MortalKombatHandler implements Handler {
 
         if (!content[0].equals(content[1])) {
             List<String> contentAsList = Arrays.asList(content);
-            return contentAsList.stream()
-                    .allMatch(s -> combatants.stream()
-                            .anyMatch(s2 -> s2.equalsIgnoreCase(s)));
+            return contentAsList.containsAll(combatants);
         }
         return false;
     }
