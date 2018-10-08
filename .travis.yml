@@ -4,6 +4,9 @@ cache:
   - .autoconf
   - $HOME/.m2
 
+notifications:
+  webhooks: https://discordapp.com/api/webhooks/498954356805206054/6jhUNAjInWQtqJi7b3uVmMiFyRzSKU_mog8hfFxaKE-UGSorqTf4pjNLCaeOd3DD0iXz
+
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
