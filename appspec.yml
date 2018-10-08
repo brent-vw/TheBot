@@ -2,9 +2,9 @@ version: 0.0
 os: linux
 files:
   - source: ./
-    destination: /home/ubuntu/The-Bot
-    owner: ubuntu
+    destination: /home/ec2-user/The-Bot
+    owner: ec2-user
 hooks:
   AfterInstall:
     - location: post_deploy.sh
-      runas: ubuntu
+      runas: ec2-user
