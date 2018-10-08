@@ -21,7 +21,7 @@ public class FightDescriptor {
                 "%(winner) and %(loser) destroyed each other through unknown brutal means. " +
                         "Only dust is left.");
         fightDescriptions.put(3, "%(winner) and %(loser) have a dance-off. %(winner) " +
-                        "won flamboyantly.");
+                "won flamboyantly.");
         fightDescriptions.put(4,
                 "%(loser) flees and falls off a cliff. %(winner) wins.");
         fightDescriptions.put(5, "%(winner) and %(loser) fight for three days and three nights " +
