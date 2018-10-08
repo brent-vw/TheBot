@@ -1,8 +1,5 @@
 package com.brentvw.discord.handler;
 
-import com.brentvw.discord.context.RequestContext;
-import com.google.common.annotations.VisibleForTesting;
-
 import java.util.*;
 
 @MessageHandler
@@ -10,12 +7,16 @@ public class MortalKombatHandler implements Handler {
 
     private final Set<String> combatants;
 
-    public MortalKombatHandler() {
-        this.combatants = new HashSet<>();
-        initCombatants();
+
+    public MortalKombatHandler(){
+
+        combatants = Init();
+
     }
 
-    private void initCombatants() {
+    private Set<String> Init() {
+        Set<String> combatants;
+        combatants = new HashSet<>();
         combatants.add("Ben");
         combatants.add("Brent");
         combatants.add("Daniel");
@@ -32,17 +33,18 @@ public class MortalKombatHandler implements Handler {
         combatants.add("Shaun");
         combatants.add("Stijn");
         combatants.add("Tim");
+        return combatants;
     }
 
     @Override
-    public boolean canHandle(RequestContext context) {
-        return context.getMessage().startsWith(getCommand());
+    public boolean canHandle(String message) {
+        return message.startsWith(getCommand());
     }
 
     @Override
-    public String handle(RequestContext context) {
+    public String handle(String message) {
 
-        String[] content = context.getMessage().replace(getCommand(), "").trim().split(" ");
+        String[] content = message.replace(getCommand(), "").trim().split(" ");
 
         if (content.length < 2) {
             return "Invalid arguments";
@@ -56,19 +58,16 @@ public class MortalKombatHandler implements Handler {
     }
 
     public String getCommand() {
-        return "!fight";
-    }
 
-    @VisibleForTesting
-    void addCombattant(String name) {
-        combatants.add(name);
+        return "!fight";
+
     }
 
     private boolean checkNames(String[] content) {
 
         if (!content[0].equals(content[1])) {
             List<String> contentAsList = Arrays.asList(content);
-            return contentAsList.containsAll(combatants);
+            return combatants.containsAll(contentAsList);
         }
         return false;
     }

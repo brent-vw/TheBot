@@ -1,27 +1,21 @@
 package com.brentvw.discord.handler;
 
-import com.brentvw.discord.context.RequestContext;
-import com.google.common.annotations.VisibleForTesting;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @MessageHandler
 public class AttendanceListHandler implements Handler {
 
-    private final List<String> names;
+    private static final List<String> names;
 
-    private String name;
+    private static String name;
 
-    public AttendanceListHandler() {
-        this.names = new ArrayList<>();
-        this.name = "";
 
-        initializeNames();
-    }
-
-    private void initializeNames() {
+    static {
+        names = new ArrayList<>();
         names.add("Ben");
         names.add("Brent");
         names.add("Daniel");
@@ -39,29 +33,15 @@ public class AttendanceListHandler implements Handler {
         names.add("Stijn");
     }
 
-    @VisibleForTesting
-    void addName(String name) {
-        names.add(name);
-    }
 
-    @VisibleForTesting
-    void clearNames() {
-        names.clear();
-    }
-
-    @VisibleForTesting
-    void setName(String name) {
-        this.name = name;
+    @Override
+    public boolean canHandle(String message) {
+        return message.startsWith(getCommand());
     }
 
     @Override
-    public boolean canHandle(RequestContext context) {
-        return context.getMessage().startsWith(getCommand());
-    }
-
-    @Override
-    public String handle(RequestContext context) {
-        String event = context.getMessage().replace(getCommand(), "").trim();
+    public String handle(String message) {
+        String event = message.replace(getCommand(), "").trim();
         switch (event) {
             case "who":
                 if (StringUtils.isEmpty(name)) {
@@ -69,8 +49,7 @@ public class AttendanceListHandler implements Handler {
                 }
                 return name;
             case "choose":
-                name = names.get((int) (Math.random() * (names.size() - 1)))
-                        + " zal de verantwoordelijke zijn voor de lijst.";
+                name = names.get((int) (Math.random() * (names.size() - 1))) + " zal de verantwoordelijke zijn voor de lijst.";
                 return name;
 
         }
@@ -79,11 +58,20 @@ public class AttendanceListHandler implements Handler {
     }
 
     public String getCommand() {
+
         return "!list";
+
     }
 
-    public String currentResponsibleForList() {
-        return name;
+    public static List<String> getNames() {
+        return Collections.unmodifiableList(names);
     }
+
+
+
+    public void currentResponsibleForList() {
+
+    }
+
 
 }
