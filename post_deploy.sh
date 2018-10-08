@@ -1,9 +1,10 @@
 #!/bin/bash
-PID_FILE=$HOME/bot.pid
-LOG_FILE=$HOME/bot.log
+EC2_HOME=/home/ec2-user
+PID_FILE=$EC2_HOME/bot.pid
+LOG_FILE=$EC2_HOME/bot.log
 
-KEY_FILE=$HOME/.keyfile
-KEY_FILE_DEST=src/main/resources/com/brentvw/discord/
+KEY_FILE=$EC2_HOME/.keyfile
+KEY_FILE_DEST=$EC2_HOME/The-Bot/src/main/resources/com/brentvw/discord
 
 if [ -e $PID_FILE ]
 then
